@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex"><title>Listing maker – ChannelHaat</title>
+<style>
+:root{color-scheme:light}*{box-sizing:border-box}
+body{margin:0;background:#F5F7FA;color:#222;font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif;padding:20px}
+main{max-width:860px;margin:0 auto}h1{margin:0 0 6px;font-size:28px}h2{font-size:18px;margin:0 0 12px}p.s{color:#8A8F98;margin:0 0 20px}
+.box{background:#fff;border:1px solid #E6E9EF;border-radius:14px;padding:18px;margin-bottom:16px}
+.g{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
+label{display:grid;gap:4px;font-size:13px;color:#8A8F98}
+input,select,textarea{width:100%;padding:10px;border:1px solid #E6E9EF;border-radius:8px;font:inherit;color:#222;background:#fff}
+textarea{min-height:90px}.w{grid-column:1/-1}
+button{border:0;border-radius:8px;padding:11px 18px;font:700 15px system-ui;background:#2952FF;color:#fff;cursor:pointer}button.a{background:#EEF2FF;color:#222}button:disabled{opacity:.6}
+.r{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}#msg{font-weight:700;margin:12px 0 0}
+.pv{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.pv div{width:110px;height:80px;border-radius:8px;background:#E6E9EF center/cover}
+</style></head><body><main>
+<h1>Listing maker</h1><p class="s">Fill in the channel, then press <b>Publish to my site</b>. It adds the listing and uploads the images to GitHub for you.</p>
+<div class="box"><div class="g">
+<label>Channel name *<input id="name"></label>
+<label>YouTube channel link<input id="link" placeholder="https://www.youtube.com/channel/UC..."></label>
+<label>Subscribers<input id="subs" type="number"></label>
+<label>Lifetime views<input id="views" type="number"></label>
+<label>Number of videos<input id="videos" type="number"></label>
+<label>Year created<input id="created" placeholder="2021"></label>
+<label>Price in ₹<input id="price" type="number"></label>
+<label>Monthly revenue<input id="revenue" placeholder="Nil, ₹5K–10K / mo"></label>
+<label>Monetized<select id="monetized"><option value="yes">Yes</option><option value="no">No</option></select></label>
+<label>Niche<select id="niche"><option>Entertainment</option><option>Gaming</option><option>Comedy</option><option>Education</option><option>Music</option><option>News</option><option>Kids</option><option>Vlog</option><option>Tech</option><option>Finance</option><option>Animation</option><option>Movies</option><option>Cooking</option></select></label>
+<label>Language<input id="language" value="HI"></label>
+<label>Recommended badge<select id="rec"><option value="">No</option><option value="1">Yes</option></select></label>
+<label class="w">Description<textarea id="description"></textarea></label>
+<label>Channel picture<input id="file" type="file" accept="image/*"></label>
+<label>Screenshots (up to 6)<input id="shots" type="file" accept="image/*" multiple></label>
+<div class="w pv" id="pv"></div>
+</div></div>
+<div class="box"><h2>GitHub connection</h2>
+<div class="g"><label>Repository<input id="repo" value="chnvsaikumar/YoutubeBuyerandseller"></label>
+<label>GitHub token (stays in this browser only)<input id="tok" type="password" placeholder="github_pat_..."></label></div>
+<div class="r"><button type="button" id="pub">Publish to my site</button><button type="button" id="copy" class="a">Copy listing text instead</button></div>
+<p id="msg" role="status"></p></div>
+</main>
+<script>
+const $=i=>document.getElementById(i);let pic="",shots=[];
+const slug=s=>s.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"")||"channel";
+try{$("tok").value=localStorage.getItem("gh_tok")||"";$("repo").value=localStorage.getItem("gh_repo")||$("repo").value}catch(e){}
+const shrink=f=>new Promise((ok,no)=>{const im=new Image();im.onload=()=>{const c=document.createElement("canvas"),k=Math.min(1,900/im.width);c.width=im.width*k;c.height=im.height*k;c.getContext("2d").drawImage(im,0,0,c.width,c.height);ok(c.toDataURL("image/jpeg",.82))};im.onerror=no;im.src=URL.createObjectURL(f)});
+function pv(){$("pv").innerHTML=[pic,...shots].filter(Boolean).map(u=>`<div style="background-image:url(${u})"></div>`).join("")}
+$("file").onchange=async e=>{pic=e.target.files[0]?await shrink(e.target.files[0]):"";pv()};
+$("shots").onchange=async e=>{shots=[];for(const f of [...e.target.files].slice(0,6))shots.push(await shrink(f));pv()};
+const msg=(t,bad)=>{$("msg").textContent=t;$("msg").style.color=bad?"#c62828":"#1F9416"};
+function entry(){const name=$("name").value.trim();if(!name)return null;const n=v=>v===""?undefined:+v,sl=slug(name);
+ const o={name,link:$("link").value.trim()||undefined,image:pic?"images/"+sl+".jpg":undefined,screenshots:shots.length?shots.map((_,i)=>"images/"+sl+"-"+(i+1)+".jpg"):undefined,subs:n($("subs").value),views:n($("views").value),videos:n($("videos").value),created:$("created").value.trim()||undefined,price:n($("price").value),monetized:$("monetized").value,niche:$("niche").value,language:$("language").value.trim()||undefined,revenue:$("revenue").value.trim()||undefined,recommended:!!$("rec").value,description:$("description").value.trim()||undefined};
+ return JSON.parse(JSON.stringify(o))}
+$("copy").onclick=async()=>{const o=entry();if(!o)return msg("Channel name is required.",1);try{await navigator.clipboard.writeText(JSON.stringify(o,null,2)+",");msg("Copied. Paste it inside the listings list in listings.json.")}catch(e){msg("Could not copy.",1)}};
+const H=()=>({Authorization:"Bearer "+$("tok").value.trim(),Accept:"application/vnd.github+json"});
+const api=(p,o={})=>fetch("https://api.github.com/repos/"+$("repo").value.trim()+"/contents/"+p,{...o,headers:{...H(),...(o.headers||{})}});
+async function put(p,b64,m){let sha;const g=await api(p);if(g.ok)sha=(await g.json()).sha;const r=await api(p,{method:"PUT",body:JSON.stringify({message:m,content:b64,sha})});if(!r.ok){let t="";try{t=(await r.json()).message}catch(e){}throw new Error(t||r.status)}}
+const u8=t=>btoa(unescape(encodeURIComponent(t)));
+$("pub").onclick=async()=>{const o=entry();if(!o)return msg("Channel name is required.",1);if(!$("tok").value.trim())return msg("Paste your GitHub token first.",1);
+ $("pub").disabled=true;msg("Publishing…");
+ try{localStorage.setItem("gh_tok",$("tok").value.trim());localStorage.setItem("gh_repo",$("repo").value.trim())}catch(e){}
+ try{const sl=slug(o.name);
+  if(pic)await put("images/"+sl+".jpg",pic.split(",")[1],"Add image for "+o.name);
+  for(let i=0;i<shots.length;i++)await put("images/"+sl+"-"+(i+1)+".jpg",shots[i].split(",")[1],"Add screenshot for "+o.name);
+  const g=await api("listings.json");let cur={listings:[]},sha;
+  if(g.ok){const j=await g.json();sha=j.sha;cur=JSON.parse(decodeURIComponent(escape(atob(j.content.replace(/\n/g,"")))));if(Array.isArray(cur))cur={listings:cur};cur.listings=cur.listings||[]}
+  cur.listings.unshift(o);
+  const r=await api("listings.json",{method:"PUT",body:JSON.stringify({message:"Add listing: "+o.name,content:u8(JSON.stringify(cur,null,2)),sha})});
+  if(!r.ok)throw new Error((await r.json()).message);
+  msg("Published. Your site will show it in about a minute.")}catch(e){msg("Could not publish: "+e.message+". Check the token and repository name.",1)}
+ $("pub").disabled=false};
+</script></body></html>
