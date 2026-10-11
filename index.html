@@ -168,7 +168,7 @@ function render(){
 }
 document.querySelectorAll(".chip").forEach(c=>c.onclick=()=>{st.m=c.dataset.m;document.querySelectorAll(".chip").forEach(k=>k.setAttribute("aria-pressed",k===c));render()});
 ["q","subs","niche","sort"].forEach(id=>$(id).oninput=render);
-const TG="your_telegram_username"; // replace with your Telegram username, no @
+const TG="@Normalinsaan22"; // replace with your Telegram username, no @
 const tg=m=>"https://t.me/"+TG+"?text="+encodeURIComponent(m);
 $("tgTop").href=$("tgFoot").href="https://t.me/"+TG;
 let mode="buy",cur=null;
