@@ -131,7 +131,9 @@ footer a{display:block;text-decoration:none;margin-bottom:9px}footer a:hover{col
 .lg img{display:none;max-width:150px;max-height:40px;width:auto;height:auto;object-fit:contain}
 .lg.has-img{border-style:solid;border-color:var(--bd)}
 .lg.has-img img{display:block}
-.lg.has-img>svg,.lg.has-img>span{display:none}
+.lg.has-img>span{display:none}
+.lg{justify-content:center;align-items:center;text-align:center}
+.lg span{display:block;text-align:center;line-height:1.25;padding:0 12px}
 @media(max-width:860px){.slide .ph{min-height:0;aspect-ratio:16/9}}
 </style>
 </head>
@@ -278,9 +280,38 @@ var P=[
 ["Meraki Streetwear","Streetwear and sneakers","Drop or Replenish? Product-Level Demand Forecasting","Built a demand forecasting model to support launch quantities and replenishment decisions, targeting a 10% reduction in forecast error.","10%","target lower forecast error"],
 ["Willow & Weave","Ethnic and fusion wear","Season-End Survival: EOSS Inventory Exit Planning","Developed an end-of-season exit plan targeting a 15% reduction in leftover seasonal inventory while monitoring markdown margins.","15%","target less leftover inventory"],
 ["Crestpoint Retail","Multi-brand retail chain","The Store Performance Gap: Retail KPI & Profitability Diagnostics","Created a store performance dashboard to identify underperforming locations and prioritize corrective actions, targeting a 5% sales improvement in selected stores.","5%","target sales improvement"]];
-var I='<svg><use href=""/></svg>',lg='',sl='',dt='';
-P.forEach(function(p,i){lg+='<div class="lg">'+I+'<span>'+p[0]+'</span><img src="images/logo-'+(i+1)+'.png" alt="'+p[0]+'" onload="this.parentNode.classList.add(\'has-img\')" onerror="this.remove()"></div>';dt+='<i data-i="'+i+'"></i>';
-sl+='<article class="slide"><div class="ph">'+I+'Project image space<br>(dashboard, chart or photo)<img src="images/project-'+(i+1)+'.jpg" alt="'+p[0]+'" onerror="this.remove()"></div><div class="tx"><small>'+(i+1)+'. '+p[0]+' · '+p[1]+'</small><h3>'+p[2]+'</h3><p>'+p[3]+'</p><b>'+p[4]+'</b><em>'+p[5]+'</em></div></article>';});
+/* ===== IMAGE LINKS: one per logo, one per project (local file or https link) =====
+   Leave a link as "" to keep the placeholder / brand name for that slot. */
+var LOGO_IMGS=[
+"logos/northline-apparel.png",   // 1  Northline Apparel
+"logos/veyra-studio.png",        // 2  Veyra Studio
+"logos/urban-thread-co.png",     // 3  Urban Thread Co.
+"logos/solenne-living.png",      // 4  Solenne Living
+"logos/form-and-field.png",      // 5  Form & Field
+"logos/threadtheory.png",        // 6  ThreadTheory
+"logos/alder-and-ash.png",       // 7  Alder & Ash
+"logos/meraki-streetwear.png",   // 8  Meraki Streetwear
+"logos/willow-and-weave.png",    // 9  Willow & Weave
+"logos/crestpoint-retail.png"    // 10 Crestpoint Retail
+];
+var PROJECT_IMGS=[
+"projects/01-buying-budget-otb.jpg",       // 1  Northline Apparel
+"projects/02-overstock-inventory-ageing.jpg", // 2  Veyra Studio
+"projects/03-store-allocation.jpg",        // 3  Urban Thread Co.
+"projects/04-markdown-margin.jpg",         // 4  Solenne Living
+"projects/05-size-curve.jpg",              // 5  Form & Field
+"projects/06-marketplace-assortment.jpg",  // 6  ThreadTheory
+"projects/07-power-query-reporting.jpg",   // 7  Alder & Ash
+"projects/08-demand-forecasting.jpg",      // 8  Meraki Streetwear
+"projects/09-eoss-exit-plan.jpg",          // 9  Willow & Weave
+"projects/10-store-kpi-dashboard.jpg"      // 10 Crestpoint Retail
+];
+var I='<svg><use href="#img"/></svg>',lg='',sl='',dt='';
+P.forEach(function(p,i){
+var li=LOGO_IMGS[i]?'<img src="'+LOGO_IMGS[i]+'" alt="'+p[0]+'" onload="this.parentNode.classList.add(\'has-img\')" onerror="this.remove()">':'';
+var pi=PROJECT_IMGS[i]?'<img src="'+PROJECT_IMGS[i]+'" alt="'+p[2]+'" onerror="this.remove()">':'';
+lg+='<div class="lg"><span>'+p[0]+'</span>'+li+'</div>';dt+='<i data-i="'+i+'"></i>';
+sl+='<article class="slide"><div class="ph">'+I+'Project image space<br>(dashboard, chart or photo)'+pi+'</div><div class="tx"><small>'+(i+1)+'. '+p[0]+' · '+p[1]+'</small><h3>'+p[2]+'</h3><p>'+p[3]+'</p><b>'+p[4]+'</b><em>'+p[5]+'</em></div></article>';});
 document.getElementById('mq').innerHTML=lg+lg;
 var t=document.getElementById('track'),d=document.getElementById('dots');t.innerHTML=sl;d.innerHTML=dt;
 function w(){return t.firstChild.offsetWidth+16}
