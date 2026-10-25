@@ -121,6 +121,18 @@ footer a{display:block;text-decoration:none;margin-bottom:9px}footer a:hover{col
 .rv{opacity:0;transform:translateY(26px);transition:opacity .8s,transform .8s}.rv.in{opacity:1;transform:none}
 @media(max-width:860px){.nav nav{display:none}.hero .wrap,.skills,.slide{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}.bento{grid-template-columns:1fr}.bento .card,.bento .card:nth-child(-n+2){grid-column:auto}.slide .ph{min-height:200px;border-right:0;border-bottom:1px dashed var(--c1)}footer .cols{grid-template-columns:1fr 1fr}.f1{left:-8px}.f2{right:-4px}section{padding:72px 0}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.rv{opacity:1;transform:none}.ring .v{stroke-dasharray:var(--d) 264}.bar i::after{width:var(--w)}}
+
+/* ===== IMAGE FIT SYSTEM: frames keep a fixed ratio, images fill them (cropped, never stretched) ===== */
+.ph,.av{position:relative;overflow:hidden}
+.ph img,.av img{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;object-position:center;display:block}
+.ph:has(img),.av:has(img){border-color:transparent;padding:0}
+.num{z-index:2}
+.lg{overflow:hidden;position:relative}
+.lg img{display:none;max-width:150px;max-height:40px;width:auto;height:auto;object-fit:contain}
+.lg.has-img{border-style:solid;border-color:var(--bd)}
+.lg.has-img img{display:block}
+.lg.has-img>svg,.lg.has-img>span{display:none}
+@media(max-width:860px){.slide .ph{min-height:0;aspect-ratio:16/9}}
 </style>
 </head>
 <body>
@@ -153,7 +165,7 @@ footer a{display:block;text-decoration:none;margin-bottom:9px}footer a:hover{col
 <p>I’m Ch. N. V. Sai Kumar. I help fashion, footwear and lifestyle brands plan stock, protect margin and automate reporting, from stores to marketplaces.</p>
 <div class="btns"><a class="btn p" href="https://wa.me/917032632374?text=Hi%20Sai%2C%20I%20have%20a%20project%20to%20discuss." target="_blank" rel="noopener">Chat on WhatsApp</a><a class="btn" href="#projects">See project examples</a></div></div>
 <div class="con"><div class="fc f2"><b>-16% → +12%</b>GOLY turnaround</div>
-<div class="hd"><div class="av">Your<br>photo</div><div><b>Sai Kumar</b><span>Planning console · sample view</span></div></div>
+<div class="hd"><div class="av">Your<br>photo<img src="images/profile.jpg" alt="Sai Kumar" onerror="this.remove()"></div><div><b>Sai Kumar</b><span>Planning console · sample view</span></div></div>
 <div class="kp"><div><b>82%</b>OTB used</div><div><b>64%</b>Sell-through</div><div><b>9 wks</b>Stock cover</div></div>
 <div class="ch" aria-label="Sample sales chart"><i style="--h:40%;--i:1"></i><i style="--h:58%;--i:2"></i><i style="--h:46%;--i:3"></i><i style="--h:72%;--i:4"></i><i style="--h:64%;--i:5"></i><i style="--h:86%;--i:6"></i><i style="--h:100%;--i:7"></i></div>
 <div class="fc f1"><b>-60%</b>reporting time</div></div>
@@ -172,8 +184,8 @@ footer a{display:block;text-decoration:none;margin-bottom:9px}footer a:hover{col
 <span class="eb">Core services</span><h2 class="t rv">Planning that turns data into <span class="g">decisions</span></h2>
 <p class="lead rv">Five services built around inventory, buying and online sales.</p>
 <div class="bento">
-<div class="card sp rv"><span class="num">01</span><div class="ph"><img src="inventory-planning.jpg" alt="Inventory Planning & Stock Optimization"></div><div class="ico"><svg><use href="#s1"/></svg></div><h3>Inventory Planning & Stock Optimization</h3><p>Right stock, right store, right time, with less ageing and fewer stockouts.</p></div>
-<div class="card sp rv"><span class="num">02</span><div class="ph"><img src="inventory-planning.jpg" alt="Inventory Planning & Stock Optimization"></div><div class="ico"><svg><use href="#s2"/></svg></div><h3>Merchandise Planning & Open-to-Buy</h3><p>Category-level OTB and seasonal plans with sales-scenario planning.</p></div>
+<div class="card sp rv"><span class="num">01</span><div class="ph"><svg><use href="#img"/></svg>Image space<img src="inventory-planning.jpg" alt="Inventory planning" onerror="this.remove()"></div><div class="ico"><svg><use href="#s1"/></svg></div><h3>Inventory Planning & Stock Optimization</h3><p>Right stock, right store, right time, with less ageing and fewer stockouts.</p></div>
+<div class="card sp rv"><span class="num">02</span><div class="ph"><svg><use href="#img"/></svg>Image space<img src="inventory-planning.jpg" alt="Merchandise planning" onerror="this.remove()"></div><div class="ico"><svg><use href="#s2"/></svg></div><h3>Merchandise Planning & Open-to-Buy</h3><p>Category-level OTB and seasonal plans with sales-scenario planning.</p></div>
 <div class="card sp rv"><span class="num">03</span><div class="ico"><svg><use href="#s3"/></svg></div><h3>Excel & Power Query Automation</h3><p>Reporting and planning workflows rebuilt to cut hours of manual work.</p></div>
 <div class="card sp rv"><span class="num">04</span><div class="ico"><svg><use href="#s4"/></svg></div><h3>Ecommerce Category & Marketplace Optimization</h3><p>SKU and channel scorecards for Amazon, Myntra, Shopify and more.</p></div>
 <div class="card sp rv"><span class="num">05</span><div class="ico"><svg><use href="#s5"/></svg></div><h3>Retail Performance & Profitability Analysis</h3><p>Store, margin and markdown diagnostics that show where to act first.</p></div>
@@ -267,8 +279,8 @@ var P=[
 ["Willow & Weave","Ethnic and fusion wear","Season-End Survival: EOSS Inventory Exit Planning","Developed an end-of-season exit plan targeting a 15% reduction in leftover seasonal inventory while monitoring markdown margins.","15%","target less leftover inventory"],
 ["Crestpoint Retail","Multi-brand retail chain","The Store Performance Gap: Retail KPI & Profitability Diagnostics","Created a store performance dashboard to identify underperforming locations and prioritize corrective actions, targeting a 5% sales improvement in selected stores.","5%","target sales improvement"]];
 var I='<svg><use href="#img"/></svg>',lg='',sl='',dt='';
-P.forEach(function(p,i){lg+='<div class="lg">'+I+p[0]+'</div>';dt+='<i data-i="'+i+'"></i>';
-sl+='<article class="slide"><div class="ph">'+I+'Project image space<br>(dashboard, chart or photo)</div><div class="tx"><small>'+(i+1)+'. '+p[0]+' · '+p[1]+'</small><h3>'+p[2]+'</h3><p>'+p[3]+'</p><b>'+p[4]+'</b><em>'+p[5]+'</em></div></article>';});
+P.forEach(function(p,i){lg+='<div class="lg">'+I+'<span>'+p[0]+'</span><img src="images/logo-'+(i+1)+'.png" alt="'+p[0]+'" onload="this.parentNode.classList.add(\'has-img\')" onerror="this.remove()"></div>';dt+='<i data-i="'+i+'"></i>';
+sl+='<article class="slide"><div class="ph">'+I+'Project image space<br>(dashboard, chart or photo)<img src="images/project-'+(i+1)+'.jpg" alt="'+p[0]+'" onerror="this.remove()"></div><div class="tx"><small>'+(i+1)+'. '+p[0]+' · '+p[1]+'</small><h3>'+p[2]+'</h3><p>'+p[3]+'</p><b>'+p[4]+'</b><em>'+p[5]+'</em></div></article>';});
 document.getElementById('mq').innerHTML=lg+lg;
 var t=document.getElementById('track'),d=document.getElementById('dots');t.innerHTML=sl;d.innerHTML=dt;
 function w(){return t.firstChild.offsetWidth+16}
