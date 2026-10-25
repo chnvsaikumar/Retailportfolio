@@ -278,7 +278,7 @@ var P=[
 ["Meraki Streetwear","Streetwear and sneakers","Drop or Replenish? Product-Level Demand Forecasting","Built a demand forecasting model to support launch quantities and replenishment decisions, targeting a 10% reduction in forecast error.","10%","target lower forecast error"],
 ["Willow & Weave","Ethnic and fusion wear","Season-End Survival: EOSS Inventory Exit Planning","Developed an end-of-season exit plan targeting a 15% reduction in leftover seasonal inventory while monitoring markdown margins.","15%","target less leftover inventory"],
 ["Crestpoint Retail","Multi-brand retail chain","The Store Performance Gap: Retail KPI & Profitability Diagnostics","Created a store performance dashboard to identify underperforming locations and prioritize corrective actions, targeting a 5% sales improvement in selected stores.","5%","target sales improvement"]];
-var I='<svg><use href="#img"/></svg>',lg='',sl='',dt='';
+var I='<svg><use href=""/></svg>',lg='',sl='',dt='';
 P.forEach(function(p,i){lg+='<div class="lg">'+I+'<span>'+p[0]+'</span><img src="images/logo-'+(i+1)+'.jpg" alt="'+p[0]+'" onload="this.parentNode.classList.add(\'has-img\')" onerror="this.remove()"></div>';dt+='<i data-i="'+i+'"></i>';
 sl+='<article class="slide"><div class="ph">'+I+'Project image space<br>(dashboard, chart or photo)<img src="images/project-'+(i+1)+'.jpg" alt="'+p[0]+'" onerror="this.remove()"></div><div class="tx"><small>'+(i+1)+'. '+p[0]+' · '+p[1]+'</small><h3>'+p[2]+'</h3><p>'+p[3]+'</p><b>'+p[4]+'</b><em>'+p[5]+'</em></div></article>';});
 document.getElementById('mq').innerHTML=lg+lg;
