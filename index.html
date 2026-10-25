@@ -279,7 +279,7 @@ var P=[
 ["Willow & Weave","Ethnic and fusion wear","Season-End Survival: EOSS Inventory Exit Planning","Developed an end-of-season exit plan targeting a 15% reduction in leftover seasonal inventory while monitoring markdown margins.","15%","target less leftover inventory"],
 ["Crestpoint Retail","Multi-brand retail chain","The Store Performance Gap: Retail KPI & Profitability Diagnostics","Created a store performance dashboard to identify underperforming locations and prioritize corrective actions, targeting a 5% sales improvement in selected stores.","5%","target sales improvement"]];
 var I='<svg><use href=""/></svg>',lg='',sl='',dt='';
-P.forEach(function(p,i){lg+='<div class="lg">'+I+'<span>'+p[0]+'</span><img src="images/logo-'+(i+1)+'.jpg" alt="'+p[0]+'" onload="this.parentNode.classList.add(\'has-img\')" onerror="this.remove()"></div>';dt+='<i data-i="'+i+'"></i>';
+P.forEach(function(p,i){lg+='<div class="lg">'+I+'<span>'+p[0]+'</span><img src="images/logo-'+(i+1)+'.png" alt="'+p[0]+'" onload="this.parentNode.classList.add(\'has-img\')" onerror="this.remove()"></div>';dt+='<i data-i="'+i+'"></i>';
 sl+='<article class="slide"><div class="ph">'+I+'Project image space<br>(dashboard, chart or photo)<img src="images/project-'+(i+1)+'.jpg" alt="'+p[0]+'" onerror="this.remove()"></div><div class="tx"><small>'+(i+1)+'. '+p[0]+' · '+p[1]+'</small><h3>'+p[2]+'</h3><p>'+p[3]+'</p><b>'+p[4]+'</b><em>'+p[5]+'</em></div></article>';});
 document.getElementById('mq').innerHTML=lg+lg;
 var t=document.getElementById('track'),d=document.getElementById('dots');t.innerHTML=sl;d.innerHTML=dt;
@@ -292,7 +292,7 @@ document.getElementById('next').onclick=function(){go(Math.min(9,cur()+1))};
 d.onclick=function(e){if(e.target.dataset.i)go(+e.target.dataset.i)};
 t.addEventListener('scroll',mark);mark();
 t.addEventListener('keydown',function(e){if(e.key==='ArrowRight')go(cur()+1);if(e.key==='ArrowLeft')go(cur()-1)});
-var W=['Analysis','AI','Data','Forecasting'],wi=0,ci=0,del=false,ty=document.getElementById('ty');
+var W=['Analysis','AI','Data','Forecast'],wi=0,ci=0,del=false,ty=document.getElementById('ty');
 function tick(){if(RM){return}var s=W[wi];ci+=del?-1:1;ty.textContent=s.slice(0,ci);var n=del?35:70;
 if(!del&&ci===s.length){del=true;n=1500}else if(del&&ci===0){del=false;wi=(wi+1)%W.length;n=300}setTimeout(tick,n)}
 setTimeout(tick,1800);
